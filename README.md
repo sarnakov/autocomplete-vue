@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/RobinScout/autocomplete-vue.svg?branch=master)](https://travis-ci.org/RobinScout/autocomplete-vue)
+[![Build Status](https://travis-ci.org/tecbeast42/autocomplete-vue.svg?branch=master)](https://travis-ci.org/tecbeast42/autocomplete-vue)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![npm](https://img.shields.io/npm/v/autocomplete-vue.svg)](https://www.npmjs.com/package/autcomplete-vue)
 [![npm](https://img.shields.io/npm/dt/autocomplete-vue.svg)](https://www.npmjs.com/package/autcomplete-vue)
