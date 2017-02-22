@@ -6,16 +6,12 @@
 
 # Autocomplete-vue
 
-Autocomplete component made with VueJs
-
-
-## Installation
-
-```
-npm install --save autocomplete-vue
-```
+autocomplete-vue is a vue component build with webpack
+If you want to include the .vue file instead of a compiled webpack js file you can use the file at `src/js/autocomplete-vue.vue`.
 
 ## Usage
+
+A demo is available in demo/demo.html.
 
 ### Initialize Autocomplete-vue
 
@@ -27,24 +23,33 @@ Vue.component('autocomplete-vue', AutocompleteVue);
 
 ### Use the Component
 
-E.g.:
-
 ```
-<autocomplete-vue :list="[{name: 'item1'}, {name: 'item2'}, {name: 'item3'}]" placeholder="Autocomplete">
-</autocomplete-vue>
+<autocomplete-vue
+    :list="[{name: 'item1'}, {name: 'item2'}, {name: 'item3'}]"
+    placeholder="Autocomplete"
+></autocomplete-vue>
 
-<autocomplete-vue classPrefix="my-custom-class" url="/my-list/all" requestType="get">
-</autocomplete-vue>
+<autocomplete-vue
+    classPrefix="my-custom-class"
+    url="/my-list/all"
+    requestType="get"
+></autocomplete-vue>
 
-<autocomplete-vue v-model="input" url="/countries/all" requestType="get" property="capital" :required="true" :threshold="1">
-</autocomplete-vue>
+<autocomplete-vue
+    v-model="input"
+    url="/countries/all"
+    requestType="get"
+    property="capital"
+    :required="true"
+    :threshold="1"
+></autocomplete-vue>
 
-<autocomplete-vue url="/important/all" requestType="post" :ignoreCase="false">
-</autocomplete-vue>
-
+<autocomplete-vue
+    url="/important/all"
+    requestType="post"
+    :ignoreCase="false"
+></autocomplete-vue>
 ```
-
-A demo is available in demo/demo.html, which you can modify.
 
 ## Props
 * ### classPrefix
@@ -117,3 +122,10 @@ A demo is available in demo/demo.html, which you can modify.
 
    The value that is set when using v-model on the component
   * required: false
+
+## Installation
+
+```
+npm install --save autocomplete-vue
+yarn add autocomplete-vue
+```
