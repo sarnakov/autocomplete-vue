@@ -1,11 +1,12 @@
 {
   "name": "autocomplete-vue",
+  "version": "1.0.0",
   "description": "Autocomplete text-input made with VueJs",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/tecbeast42/autocomplete-vue.git"
   },
-  "main": "src/js/autocomplete-vue.vue",
+  "main": "src/js/autocomplete-vue.js",
   "keywords": [
     "vuejs",
     "autocomplete",
