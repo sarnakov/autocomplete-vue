@@ -51,66 +51,67 @@ Vue.component('autocomplete-vue', AutocompleteVue);
 ></autocomplete-vue>
 ```
 
-## Props
-* ### classPrefix
+## Properties
+
+### classPrefix
 
    Sets prefix for the styling class (override)
   * type: String,
   * required: false
   * default: 'autocomplete
 
-* ### url
+### url
 
    An url to load the list from
   * type: String,
   * required: false
 
-* ### requestType
+### requestType
 
    The request type for the url
   * type: String,
   * required: false
 
-* ### list
+### list
 
    A list of objects that the input should be compared to
   * type: Array,
   * required: false
 
-* ### property
+### property
 
    The property in the list that the autocomplete will compare
   * type: String,
   * required: false,
   * default: 'name'
 
-* ### placeholder
+### placeholder
 
    A placeholder text for the input field
   * type: String,
   * required: false
 
-* ### inputClass
+### inputClass
 
    Specifies a class for the input field
   * type: String,
   * required: false
 
-* ### required
+### required
 
    If the input field is required when submitting a form
   * type: Boolean,
   * required: false,
   * default: false
 
-* ### ignoreCase
+### ignoreCase
 
    If set to false, the autocomplete will be case sensitive ('a' doesn't match 'A')
   * type: Boolean,
   * required: false,
   * default: true
 
-* ### threshold
+### threshold
 
    The number of characters required for the autocomplete-list to show
    Setting a negative number will make the list visible all the time (with focus)
@@ -118,7 +119,7 @@ Vue.component('autocomplete-vue', AutocompleteVue);
   * required: false,
   * default: 0
 
-* ### value
+### value
 
    The value that is set when using v-model on the component
   * required: false
