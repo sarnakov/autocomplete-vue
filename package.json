@@ -10,7 +10,8 @@
   "keywords": [
     "vuejs",
     "autocomplete",
-    "component"
+    "component",
+    "vueify"
   ],
   "author": "TecBeast",
   "license": "MIT",
