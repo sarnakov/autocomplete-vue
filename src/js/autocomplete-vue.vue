@@ -142,51 +142,52 @@ export default {
         classPrefix: {
             type: String,
             required: false,
-            default: 'autocomplete'
+            default: 'autocomplete',
         },
         url: {
             type: String,
-            required: false
+            required: false,
         },
         requestType: {
             type: String,
-            required: false
+            required: false,
+            default: 'get',
         },
         list: {
             type: Array,
-            required: false
+            required: false,
         },
         placeholder: {
             type: String,
-            required: false
+            required: false,
         },
         property: {
             type: String,
             required: false,
-            default: 'name'
+            default: 'name',
         },
         inputClass: {
             type: String,
-            required: false
+            required: false,
         },
         required: {
             type: Boolean,
             required: false,
-            default: false
+            default: false,
         },
         ignoreCase: {
             type: Boolean,
             required: false,
-            default: true
+            default: true,
         },
         threshold: {
             type: Number,
             required: false,
-            default: 0
+            default: 0,
         },
         value: {
             required: false,
-            default: ''
+            default: '',
         }
     },
     watch: {

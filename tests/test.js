@@ -125,7 +125,7 @@ describe('Autocomplete', function() {
             });
         });
 
-        let vm = setup('url="/api/derp" requestType="get"');
+        let vm = setup('url="/api/derp"');
         await vm.$children[0].getListAjax();
         expect(vm.$children[0].entries[0].name).to.equal('getajaxtest');
 
