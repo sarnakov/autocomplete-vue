@@ -18,7 +18,7 @@
   "bugs": {
     "url": "https://github.com/tecbeast42/autocomplete-vue/issues"
   },
-  "homepage": "https://github.com/tecbeast42/autcomplete-vue#readme",
+  "homepage": "https://github.com/tecbeast42/autocomplete-vue#readme",
   "scripts": {
     "build": "gulp --production",
     "prepublish": "npm run build",

@@ -92,6 +92,7 @@ export default {
         }
     },
     created () {
+        this.search = this.value;
         if (this.list !== undefined) {
             this.setEntries(this.list);
         } else if (this.url !== undefined && this.requestType !== undefined) {
@@ -184,7 +185,8 @@ export default {
             default: 0
         },
         value: {
-            required: false
+            required: false,
+            default: ''
         }
     },
     watch: {
@@ -195,6 +197,9 @@ export default {
         },
         search (value) {
             this.$emit('input', value);
+        },
+        value (newValue) {
+            this.search = newValue;
         }
     }
 };

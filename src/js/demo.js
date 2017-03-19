@@ -6,5 +6,5 @@ Vue.use(require('vue-resource'));
 Vue.component('autocomplete-vue', AutocompleteVue);
 
 new Vue({
-    el: '#app',
+    el: '#app'
 });
