@@ -7,7 +7,7 @@
 # Autocomplete-vue
 
 autocomplete-vue is a vue component build with webpack
-If you want to include the .vue file instead of a compiled webpack js file you can use the file at `src/js/autocomplete-vue.vue`.
+If you want to include the .vue file instead of a compiled webpack js file you can require/import the file at `autocomplete-vue/src/js/autocomplete-vue.vue`.
 
 ## Usage
 
