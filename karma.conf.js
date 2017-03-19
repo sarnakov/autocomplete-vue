@@ -1,5 +1,6 @@
 // Karma configuration
 // Generated on Fri Feb 17 2017 13:03:33 GMT+0200 (CEST)
+var path = require('path');
 
 module.exports = function(config) {
   config.set({
@@ -10,11 +11,15 @@ module.exports = function(config) {
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
+    // frameworks: ['jasmine'],
     frameworks: ['mocha', 'chai'],
 
     // list of files / patterns to load in the browser
     files: [
-        'tests/*.js'
+        'node_modules/vue/dist/vue.js',
+        'node_modules/vue-resource/dist/vue-resource.js',
+        'node_modules/babel-polyfill/dist/polyfill.js',
+        'test/test.js'
     ],
 
 
@@ -26,29 +31,31 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-        'tests/*.js': ['webpack']
+        './test/test.js': ['webpack']
     },
-
 
     webpack: {
         module: {
-            loaders: [
-                { test: /\.js/, exclude: /node_modules/, loader: 'babel-loader' },
-                { test: /\.vue/, exclude: /node_modules/, loader: 'vue' }
+            rules: [
+                {
+                    test: /\.js$/,
+                    exclude: path.join(__dirname, 'node_modules'),
+                    use: {
+                        loader: 'babel-loader',
+                    }
+                },
+                {
+                    test: /\.vue$/,
+                    exclude: path.join(__dirname, 'node_modules'),
+                    loader: 'vue-loader'
+                }
             ]
         },
         resolve: {
-          alias: {
-            vue: 'vue/dist/vue.js'
-          }
+            alias: {
+                vue: 'vue/dist/vue.js'
+            }
         },
-        watch: true
-    },
-
-    webpackMiddleware: {
-      stats: {
-        chunks: false
-      }
     },
 
     // test results reporter to use
@@ -71,7 +78,7 @@ module.exports = function(config) {
 
     // level of logging
     // possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
-    logLevel: config.LOG_INFO,
+    logLevel: config.LOG_ERROR,
 
 
     // enable / disable watching file and executing tests whenever any file changes
@@ -85,6 +92,6 @@ module.exports = function(config) {
 
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
-    singleRun: true
+    singleRun: false
   });
 }

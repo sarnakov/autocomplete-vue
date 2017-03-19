@@ -1,11 +1,6 @@
-import Vue from 'vue';
-Vue.use(require('vue-resource'));
 import autocomplete from '../src/js/autocomplete-vue.vue';
-require("babel-polyfill");
 
-describe('Autocomplete', function() {
-    // var vm;
-
+describe('Autocomplete', () => {
     it('should show placeholder text', () => {
         const vm = setup('placeholder="test"');
         const placeholder = vm.$el.querySelector('input').getAttribute('placeholder');

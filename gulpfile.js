@@ -13,4 +13,5 @@ elixir(mix => {
             library: 'Autocomplete'
         }
     });
+    mix.webpack('demo.js');
 });
