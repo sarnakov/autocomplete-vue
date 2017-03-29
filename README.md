@@ -51,6 +51,16 @@ Vue.component('autocomplete-vue', AutocompleteVue);
 ></autocomplete-vue>
 ```
 
+### Listen to the "select" event
+
+```
+import { autocompleteBus } from 'autocomplete-vue';
+
+autocompleteBus.$on('autocomplete-select', function (selectedValue) {
+  // do something
+});
+```
+
 ## Properties
 
 ### classPrefix
@@ -124,6 +134,13 @@ Vue.component('autocomplete-vue', AutocompleteVue);
 
    The value that is set when using v-model on the component
   * required: false
+
+### autoHide
+
+   If the suggestions-box should hide itself after an entry is selected
+  * type: Boolean
+  * required: false
+  * default: true
 
 ## Installation
 

@@ -1,4 +1,9 @@
 demo
-tests
-gulpfile.js
+test
 node_modules
+.babelrc
+.gitignore
+.travis.yml
+karma.conf.js
+webpack.config.js
+yarn.lock

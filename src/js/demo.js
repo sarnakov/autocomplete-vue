@@ -1,10 +1,15 @@
 import Vue from 'vue';
-import AutocompleteVue from '../../dist/js/autocomplete-vue.js';
+import AutocompleteVue from './autocomplete-vue.vue';
+import {autocompleteBus} from './autocompleteBus.js';
 
 Vue.use(require('vue-resource'));
-
 Vue.component('autocomplete-vue', AutocompleteVue);
 
 new Vue({
-    el: '#app'
+    el: '#app',
+    created () {
+        autocompleteBus.$on('autocomplete-select', (text) => {
+            console.log('autocomplete-select event: ' + text);
+        });
+    }
 });

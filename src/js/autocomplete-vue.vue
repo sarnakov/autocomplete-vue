@@ -49,6 +49,8 @@
 </template>
 
 <script>
+import { autocompleteBus } from './autocompleteBus.js';
+
 export default {
     data () {
         return {
@@ -103,9 +105,17 @@ export default {
         select (index) {
             if (this.hasSuggestions) {
                 this.search = this.filteredEntries[index][this.property];
-                this.$nextTick(() => {
-                    this.$refs.input.focus();
-                });
+                autocompleteBus.$emit('autocomplete-select', this.search);
+
+                if (this.autoHide) {
+                    this.mousefocus = false;
+                    this.focused = false;
+                    this.$refs.input.blur();
+                } else {
+                    this.$nextTick(() => {
+                        this.$refs.input.focus();
+                    });
+                }
             }
         },
         setEntries (list) {
@@ -188,6 +198,11 @@ export default {
         value: {
             required: false,
             default: '',
+        },
+        autoHide: {
+            type: Boolean,
+            required: false,
+            default: true,
         }
     },
     watch: {
