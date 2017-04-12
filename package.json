@@ -1,6 +1,6 @@
 {
   "name": "autocomplete-vue",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Autocomplete text-input made with VueJs",
   "repository": {
     "type": "git",
