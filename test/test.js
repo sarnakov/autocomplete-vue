@@ -58,6 +58,10 @@ describe('Autocomplete', () => {
             }
         }).$mount();
         const component = vm.$refs.autocomplete;
+        // Initial value
+        expect(component.search).to.equal('start');
+
+        // Set child value - change parent value
         component.search = 'changed';
         vm.$nextTick(() => {
             expect(vm.test).to.equal('changed');
@@ -136,8 +140,33 @@ describe('Autocomplete', () => {
         vm = setup('url="/api/derp" requestType="post"');
         await vm.$children[0].getListAjax();
         expect(vm.$children[0].entries[0].name).to.equal('postajaxtest');
+    });
 
-      });
+    it('should autohide', () => {
+        const vm = setup(':autoHide="true" ref="autocomplete" :list="[{name: \'test\'}]"');
+        const component = vm.$refs.autocomplete;
+        component.focused = true;
+        component.mousefocus = true;
+        component.search = 'test';
+        expect(component.focused).to.be.true;
+        expect(component.mousefocus).to.be.true;
+        component.select(0);
+        expect(component.focused).to.be.false;
+        expect(component.mousefocus).to.be.false;
+    });
+
+    it('should not autohide', () => {
+        const vm = setup(':autoHide="false" ref="autocomplete" :list="[{name: \'test\'}]"');
+        const component = vm.$refs.autocomplete;
+        component.focused = true;
+        component.mousefocus = true;
+        component.search = 'test';
+        expect(component.focused).to.be.true;
+        expect(component.mousefocus).to.be.true;
+        component.select(0);
+        expect(component.focused).to.be.true;
+        expect(component.mousefocus).to.be.true;
+    });
 });
 
 function setup(options) {
