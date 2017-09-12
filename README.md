@@ -9,6 +9,14 @@
 autocomplete-vue is a vue component build with webpack
 If you want to include the .vue file instead of a compiled webpack js file you can require/import the file at `autocomplete-vue/src/js/autocomplete-vue.vue`.
 
+## Installation
+
+> autocomplete-vue requires this.$http to be availble in your vue componentes. You can use `axios` or `vue-resource`. Axios is part of the peerDependencies because that is what vue.js currently recommends.
+
+```
+npm install --save autocomplete-vue axios
+```
+
 ## Usage
 
 A demo is available in demo/demo.html.
@@ -142,9 +150,3 @@ autocompleteBus.$on('autocomplete-select', function (selectedValue) {
   * required: false
   * default: true
 
-## Installation
-
-```
-npm install --save autocomplete-vue
-yarn add autocomplete-vue
-```
