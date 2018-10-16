@@ -49,174 +49,179 @@
 </template>
 
 <script>
-import { autocompleteBus } from './autocompleteBus.js';
+import { autocompleteBus } from "./autocompleteBus.js";
 
 export default {
-    data () {
-        return {
-            entries: [],
-            search: '',
-            focused: false,
-            mousefocus: false,
-            selectedIndex: 0
-        };
+  data() {
+    return {
+      entries: [],
+      search: "",
+      focused: false,
+      mousefocus: false,
+      selectedIndex: 0
+    };
+  },
+  computed: {
+    filteredEntries() {
+      if (this.search.length <= this.threshold) {
+        return [];
+      } else {
+        return this.entries.filter(entry => {
+          if (this.ignoreCase) {
+            return (
+              entry[this.property]
+                .toLowerCase()
+                .indexOf(this.search.toLowerCase()) > -1
+            );
+          }
+          return entry[this.property].indexOf(this.search) > -1;
+        });
+      }
     },
-    computed: {
-        filteredEntries () {
-            if (this.search.length <= this.threshold) {
-                return [];
-            } else {
-                return this.entries.filter((entry) => {
-                    if (this.ignoreCase) {
-                        return entry[this.property].toLowerCase().indexOf(this.search.toLowerCase()) > -1;
-                    }
-                    return entry[this.property].indexOf(this.search) > -1;
-                });
-            }
-        },
-        hasSuggestions () {
-            if (this.search.length <= this.threshold) {
-                return false;
-            }
+    hasSuggestions() {
+      if (this.search.length <= this.threshold) {
+        return false;
+      }
 
-            return this.filteredEntries.length > 0;
-        },
-        showSuggestions () {
-            if (!this.hasSuggestions) {
-                return false;
-            }
-
-            if (this.focused || this.mousefocus) {
-                return true;
-            }
-
-            return false;
-        }
+      return this.filteredEntries.length > 0;
     },
-    created () {
-        this.search = this.value;
-        if (this.list !== undefined) {
-            this.setEntries(this.list);
-        } else if (this.url !== undefined && this.requestType !== undefined) {
-            this.getListAjax();
-        }
-    },
-    methods: {
-        select (index) {
-            if (this.hasSuggestions) {
-                this.search = this.filteredEntries[index][this.property];
-                autocompleteBus.$emit('autocomplete-select', this.search);
+    showSuggestions() {
+      if (!this.hasSuggestions) {
+        return false;
+      }
 
-                if (this.autoHide) {
-                    this.mousefocus = false;
-                    this.focused = false;
-                    this.$refs.input.blur();
-                } else {
-                    this.$nextTick(() => {
-                        this.$refs.input.focus();
-                    });
-                }
-            }
-        },
-        setEntries (list) {
-            this.entries = list;
-        },
-        moveUp () {
-            if ((this.selectedIndex - 1) < 0) {
-                this.selectedIndex = this.filteredEntries.length - 1;
-            } else {
-                this.selectedIndex -= 1;
-            }
-        },
-        moveDown () {
-            if ((this.selectedIndex + 1) > (this.filteredEntries.length - 1)) {
-                this.selectedIndex = 0;
-            } else {
-                this.selectedIndex += 1;
-            }
-        },
-        selectedClass (index) {
-            if (index === this.selectedIndex) {
-                return this.classPrefix + '__selected';
-            }
+      if (this.focused || this.mousefocus) {
+        return true;
+      }
 
-            return '';
-        },
-        getListAjax () {
-            return this.$http[this.requestType](this.url).then(response => {
-                this.setEntries(response.data);
-            });
-        }
-    },
-    props: {
-        classPrefix: {
-            type: String,
-            required: false,
-            default: 'autocomplete',
-        },
-        url: {
-            type: String,
-            required: false,
-        },
-        requestType: {
-            type: String,
-            required: false,
-            default: 'get',
-        },
-        list: {
-            type: Array,
-            required: false,
-        },
-        placeholder: {
-            type: String,
-            required: false,
-        },
-        property: {
-            type: String,
-            required: false,
-            default: 'name',
-        },
-        inputClass: {
-            type: String,
-            required: false,
-        },
-        required: {
-            type: Boolean,
-            required: false,
-            default: false,
-        },
-        ignoreCase: {
-            type: Boolean,
-            required: false,
-            default: true,
-        },
-        threshold: {
-            type: Number,
-            required: false,
-            default: 0,
-        },
-        value: {
-            required: false,
-            default: '',
-        },
-        autoHide: {
-            type: Boolean,
-            required: false,
-            default: true,
-        }
-    },
-    watch: {
-        filteredEntries (value) {
-            if (this.selectedIndex > value.length - 1) {
-                this.selectedIndex = 0;
-            }
-        },
-        search (value) {
-            this.$emit('input', value);
-        },
-        value (newValue) {
-            this.search = newValue;
-        }
+      return false;
     }
+  },
+  created() {
+    this.search = this.value;
+    if (this.list !== undefined) {
+      this.setEntries(this.list);
+    } else if (this.url !== undefined && this.requestType !== undefined) {
+      this.getListAjax();
+    }
+  },
+  methods: {
+    select(index) {
+      if (this.hasSuggestions) {
+        this.search = this.filteredEntries[index][this.property];
+        autocompleteBus.$emit("autocomplete-select", this.search);
+        this.$emit("selected", this.search);
+
+        if (this.autoHide) {
+          this.mousefocus = false;
+          this.focused = false;
+          this.$refs.input.blur();
+        } else {
+          this.$nextTick(() => {
+            this.$refs.input.focus();
+          });
+        }
+      }
+    },
+    setEntries(list) {
+      this.entries = list;
+    },
+    moveUp() {
+      if (this.selectedIndex - 1 < 0) {
+        this.selectedIndex = this.filteredEntries.length - 1;
+      } else {
+        this.selectedIndex -= 1;
+      }
+    },
+    moveDown() {
+      if (this.selectedIndex + 1 > this.filteredEntries.length - 1) {
+        this.selectedIndex = 0;
+      } else {
+        this.selectedIndex += 1;
+      }
+    },
+    selectedClass(index) {
+      if (index === this.selectedIndex) {
+        return this.classPrefix + "__selected";
+      }
+
+      return "";
+    },
+    getListAjax() {
+      return this.$http[this.requestType](this.url).then(response => {
+        this.setEntries(response.data);
+      });
+    }
+  },
+  props: {
+    classPrefix: {
+      type: String,
+      required: false,
+      default: "autocomplete"
+    },
+    url: {
+      type: String,
+      required: false
+    },
+    requestType: {
+      type: String,
+      required: false,
+      default: "get"
+    },
+    list: {
+      type: Array,
+      required: false
+    },
+    placeholder: {
+      type: String,
+      required: false
+    },
+    property: {
+      type: String,
+      required: false,
+      default: "name"
+    },
+    inputClass: {
+      type: String,
+      required: false
+    },
+    required: {
+      type: Boolean,
+      required: false,
+      default: false
+    },
+    ignoreCase: {
+      type: Boolean,
+      required: false,
+      default: true
+    },
+    threshold: {
+      type: Number,
+      required: false,
+      default: 0
+    },
+    value: {
+      required: false,
+      default: ""
+    },
+    autoHide: {
+      type: Boolean,
+      required: false,
+      default: true
+    }
+  },
+  watch: {
+    filteredEntries(value) {
+      if (this.selectedIndex > value.length - 1) {
+        this.selectedIndex = 0;
+      }
+    },
+    search(value) {
+      this.$emit("input", value);
+    },
+    value(newValue) {
+      this.search = newValue;
+    }
+  }
 };
 </script>

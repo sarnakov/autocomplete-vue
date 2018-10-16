@@ -3,7 +3,6 @@
 [![npm](https://img.shields.io/npm/v/autocomplete-vue.svg)](https://www.npmjs.com/package/autocomplete-vue)
 [![npm](https://img.shields.io/npm/dt/autocomplete-vue.svg)](https://www.npmjs.com/package/autocomplete-vue)
 
-
 # Autocomplete-vue
 
 autocomplete-vue is a vue component build with webpack
@@ -59,7 +58,13 @@ Vue.component('autocomplete-vue', AutocompleteVue);
 ></autocomplete-vue>
 ```
 
-### Listen to the "select" event
+### Listen to the "select" event on the element itself
+
+```
+<autocomplete-vue v-on:selected="method" />
+```
+
+### or import the event bus separately
 
 ```
 import { autocompleteBus } from 'autocomplete-vue';
@@ -73,80 +78,91 @@ autocompleteBus.$on('autocomplete-select', function (selectedValue) {
 
 ### classPrefix
 
-   Sets prefix for the styling class (override)
-  * type: String
-  * required: false
-  * default: 'autocomplete
+Sets prefix for the styling class (override)
+
+- type: String
+- required: false
+- default: 'autocomplete
 
 ### url
 
-   An url to load the list from
-  * type: String
-  * required: false
+An url to load the list from
+
+- type: String
+- required: false
 
 ### requestType
 
-   The request type for the url
-  * type: String
-  * required: false
-  * default: 'get'
+The request type for the url
+
+- type: String
+- required: false
+- default: 'get'
 
 ### list
 
-   A list of objects that the input should be compared to
-  * type: Array
-  * required: false
+A list of objects that the input should be compared to
+
+- type: Array
+- required: false
 
 ### property
 
-   The property in the list that the autocomplete will compare
-  * type: String
-  * required: false
-  * default: 'name'
+The property in the list that the autocomplete will compare
+
+- type: String
+- required: false
+- default: 'name'
 
 ### placeholder
 
-   A placeholder text for the input field
-  * type: String
-  * required: false
+A placeholder text for the input field
+
+- type: String
+- required: false
 
 ### inputClass
 
-   Specifies a class for the input field
-  * type: String
-  * required: false
+Specifies a class for the input field
+
+- type: String
+- required: false
 
 ### required
 
-   If the input field is required when submitting a form
-  * type: Boolean
-  * required: false
-  * default: false
+If the input field is required when submitting a form
+
+- type: Boolean
+- required: false
+- default: false
 
 ### ignoreCase
 
-   If set to false, the autocomplete will be case sensitive ('a' doesn't match 'A')
-  * type: Boolean
-  * required: false
-  * default: true
+If set to false, the autocomplete will be case sensitive ('a' doesn't match 'A')
+
+- type: Boolean
+- required: false
+- default: true
 
 ### threshold
 
-   The number of characters required for the autocomplete-list to show
-   Setting a negative number will make the list visible all the time (with focus)
-  * type: Number
-  * required: false
-  * default: 0
+The number of characters required for the autocomplete-list to show
+Setting a negative number will make the list visible all the time (with focus)
+
+- type: Number
+- required: false
+- default: 0
 
 ### value
 
-   The value that is set when using v-model on the component
-  * required: false
+The value that is set when using v-model on the component
+
+- required: false
 
 ### autoHide
 
-   If the suggestions-box should hide itself after an entry is selected
-  * type: Boolean
-  * required: false
-  * default: true
+If the suggestions-box should hide itself after an entry is selected
 
+- type: Boolean
+- required: false
+- default: true
