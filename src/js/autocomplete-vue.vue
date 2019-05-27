@@ -109,8 +109,8 @@ export default {
     select(index) {
       if (this.hasSuggestions) {
         this.search = this.filteredEntries[index][this.property];
-        autocompleteBus.$emit("autocomplete-select", this.search);
-        this.$emit("selected", this.search);
+        autocompleteBus.$emit("autocomplete-select", this.filteredEntries[index]);
+        this.$emit("selected", this.filteredEntries[index]);
 
         if (this.autoHide) {
           this.mousefocus = false;
