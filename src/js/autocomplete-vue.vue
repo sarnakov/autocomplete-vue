@@ -29,7 +29,7 @@
 
 <template>
     <div :class="classPrefix" @mousedown="mousefocus = true" @mouseout="mousefocus = false">
-        <input type="text" @blur="focused = false" @focus="focused = true"
+        <input type="text" :index="inputIndex" @blur="focused = false" @focus="focused = true"
             v-model="search" :placeholder="placeholder" :class="inputClass"
             @keydown.down.prevent.stop="moveDown()"
             @keydown.up.prevent.stop="moveUp()"
@@ -58,7 +58,8 @@ export default {
       search: "",
       focused: false,
       mousefocus: false,
-      selectedIndex: 0
+      selectedIndex: 0,
+      inputIndex:0
     };
   },
   computed: {
@@ -110,7 +111,7 @@ export default {
       if (this.hasSuggestions) {
         this.search = this.filteredEntries[index][this.property];
         autocompleteBus.$emit("autocomplete-select", this.filteredEntries[index]);
-        this.$emit("selected", this.filteredEntries[index]);
+        this.$emit("selected", this.filteredEntries[index], this.inputIndex);
 
         if (this.autoHide) {
           this.mousefocus = false;
