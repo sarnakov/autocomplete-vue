@@ -1,6 +1,6 @@
 {
   "name": "autocomplete-vue-obj",
-  "version": "1.1.7",
+  "version": "1.1.8",
   "description": "Autocomplete text-input made with VueJs that returns selected object",
   "repository": {
     "type": "git",
