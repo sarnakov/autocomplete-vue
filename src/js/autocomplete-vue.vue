@@ -59,7 +59,6 @@ export default {
       focused: false,
       mousefocus: false,
       selectedIndex: 0,
-      inputIndex:0
     };
   },
   computed: {
@@ -197,6 +196,11 @@ export default {
       default: true
     },
     threshold: {
+      type: Number,
+      required: false,
+      default: 0
+    },
+    inputIndex: {
       type: Number,
       required: false,
       default: 0
