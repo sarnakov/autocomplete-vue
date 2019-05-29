@@ -1,12 +1,10 @@
 <style lang="sass">
     .autocomplete {
         position: relative;
-
         input {
             width: 100%;
         }
     }
-
     .autocomplete__suggestions {
         position: absolute;
         top: 100%;
@@ -14,14 +12,12 @@
         width: 100%;
         z-index: 2;
     }
-
     .autocomplete__entry {
         &:hover {
             background-color: #f7f7f9;
             cursor: default;
         }
     }
-
     .autocomplete__selected {
         background-color: darken(#f7f7f9, 5%);
     }
@@ -50,7 +46,6 @@
 
 <script>
 import { autocompleteBus } from "./autocompleteBus.js";
-
 export default {
   data() {
     return {
@@ -82,18 +77,15 @@ export default {
       if (this.search.length <= this.threshold) {
         return false;
       }
-
       return this.filteredEntries.length > 0;
     },
     showSuggestions() {
       if (!this.hasSuggestions) {
         return false;
       }
-
       if (this.focused || this.mousefocus) {
         return true;
       }
-
       return false;
     }
   },
@@ -109,9 +101,8 @@ export default {
     select(index) {
       if (this.hasSuggestions) {
         this.search = this.filteredEntries[index][this.property];
-        autocompleteBus.$emit("autocomplete-select", this.filteredEntries[index]);
-        this.$emit("selected", this.filteredEntries[index]);
-
+        autocompleteBus.$emit("autocomplete-select", {object:this.filteredEntries[index], index: this.indexOfInput});
+        this.$emit("selected", {object:this.filteredEntries[index], index: this.indexOfInput});
         if (this.autoHide) {
           this.mousefocus = false;
           this.focused = false;
@@ -144,7 +135,6 @@ export default {
       if (index === this.selectedIndex) {
         return this.classPrefix + "__selected";
       }
-
       return "";
     },
     getListAjax() {
@@ -196,6 +186,11 @@ export default {
       default: true
     },
     threshold: {
+      type: Number,
+      required: false,
+      default: 0
+    },
+    indexOfInput: {
       type: Number,
       required: false,
       default: 0
